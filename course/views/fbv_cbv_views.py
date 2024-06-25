@@ -34,3 +34,4 @@ class CourseList(View):
         course = json.loads(request.body.decode('utf-8'))
         return JsonResponse(course, safe=False) # safe=False表示允许返回非字典类型的数据(解析出来是字符串的话，就把safe设置为False)
 
+# 实际开发中经常需要 分页、排序、认证、权限、限流等等，上面的写法无法满足这些需求，所以需要使用DRF，我们新写一个视图类，演示DRF的API接口编写
