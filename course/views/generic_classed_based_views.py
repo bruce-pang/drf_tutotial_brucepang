@@ -4,13 +4,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from course.models import CourseModel
 from course.serializers import CourseSerializer
-
+from course.permission import IsOwnerOrReadOnly
 """
 三、通用类视图 Generic Class Based Views
 """
 class GenericCourseList(generics.ListCreateAPIView): # 自带了get和post方法
     authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication] # 指定认证类
-    permission_classes = [IsAuthenticated,] # 权限类
     """
     课程列表
     """
@@ -21,6 +20,7 @@ class GenericCourseList(generics.ListCreateAPIView): # 自带了get和post方法
         serializer.save(teacher=self.request.user)
 
 class GenericCourseDetail(generics.RetrieveUpdateDestroyAPIView): # 自带了get、put、delete方法
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly] # 权限类
     """
     课程详情
     """

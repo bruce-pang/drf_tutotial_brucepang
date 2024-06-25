@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from course.models import CourseModel
+from course.permission import IsOwnerOrReadOnly
 from course.serializers import CourseSerializer
 """
 一、函数式视图 Function Based Views
@@ -12,7 +13,6 @@ from course.serializers import CourseSerializer
 
 @api_view(['GET', 'POST']) # 限制请求方法为GET和POST
 @authentication_classes([TokenAuthentication]) # 在全局已经设置了多种认证方式，如果某个视图需要特定的认证方式，可以通过此装饰器设置，@authentication_classes一定要写在@api_view的下面，有先后顺序
-@permission_classes(IsAuthenticated,) # 在全局已经设置了多种权限方式，如果某个视图需要特定的权限方式，可以通过此装饰器设置，@permission_classes一定要写在@api_view的下面，有先后顺序 ， 自定义的权限也可以添加在里面
 def course_list(request):
     """
     获取所有课程信息或新增一个课程
@@ -29,6 +29,8 @@ def course_list(request):
             return Response(data=s.data, status=status.HTTP_201_CREATED)
         return Response(data=s.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET', 'PUT', 'DELETE']) # 限制请求方法为GET、PUT和DELETE
+@authentication_classes([TokenAuthentication]) # 在全局已经设置了多种认证方式，如果某个视图需要特定的认证方式，可以通过此装饰器设置，@authentication_classes一定要写在@api_view的下面，有先后顺序
+@permission_classes([IsAuthenticated, IsOwnerOrReadOnly,]) # 在全局已经设置了多种权限方式，如果某个视图需要特定的权限方式，可以通过此装饰器设置，@permission_classes一定要写在@api_view的下面，有先后顺序 ， 自定义的权限也可以添加在里面
 def course_detail(request, pk):
     """
     获取、更新或删除一个课程

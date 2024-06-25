@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from course.models import CourseModel
+from course.permission import IsOwnerOrReadOnly
 from course.serializers import CourseSerializer
 from rest_framework.authtoken.models import Token # DRF的token认证
 from django.db.models.signals import post_save # 使用信号机制，当用户创建成功后，此信号会被触发
@@ -28,7 +29,7 @@ def generate_token(sender, instance=None, created=False, **kwargs): # 信号的�
 
 class CourseViewSet(viewsets.ModelViewSet): # 继承ModelViewSet，自带了get、post、put、delete方法
     authentication_classes = [TokenAuthentication] # 指定认证类
-    permission_classes = [IsAuthenticated,] # 权限类
+    permission_classes = [IsOwnerOrReadOnly] # 权限类
     """
     课程列表和详情
     """
