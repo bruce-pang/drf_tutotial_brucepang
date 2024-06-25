@@ -138,7 +138,7 @@ STATICFILES_DIRS = [
 ]
 # DRF全局配置
 REST_FRAMEWORK = {
-    # "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema", # 类似于swagger的接口文档， 还需要配置url才能访问
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',

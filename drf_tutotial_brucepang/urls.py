@@ -18,10 +18,14 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views # 提供token认证的视图
+from rest_framework.schemas import get_schema_view # 视图概要(类似于swagger)
+
+schema_view = get_schema_view(title="DRF API文档", description="DRF API文档", version="1.0.0")
 
 urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token), # 获取token的接口
     path('api-auth/', include('rest_framework.urls')), # DRF的登录退出
     path('admin/', admin.site.urls),
     path('course/', include('course.urls')), # course的路由
+    path('schema/', schema_view), # schema视图(相当于swagger)
 ]
