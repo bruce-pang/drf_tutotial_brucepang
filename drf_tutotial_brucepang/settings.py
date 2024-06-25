@@ -159,4 +159,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [ # DRF默认的权限类
         'rest_framework.permissions.IsAuthenticated', # 需要登录
     ],
+    'URL_FIELD_NAME': 'link', # HyperlinkedModelSerializer的url字段名，默认为url，可以自定义
 }
