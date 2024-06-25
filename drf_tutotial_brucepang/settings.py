@@ -152,8 +152,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser', # 解析请求体的文件数据
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [ # DRF默认的认证类
-        'rest_framework.authentication.BasicAuthentication', # 用户名密码认证
-        'rest_framework.authentication.SessionAuthentication', # session认证
+        'rest_framework.authentication.BasicAuthentication', # 用户名密码认证（基于Base64在请求头传递，可以轻易解密）
+        'rest_framework.authentication.SessionAuthentication', # session认证, 需要开启CSRF token， 否则会报403错误
         'rest_framework.authentication.TokenAuthentication', # token认证
     ],
     'DEFAULT_PERMISSION_CLASSES': [ # DRF默认的权限类
