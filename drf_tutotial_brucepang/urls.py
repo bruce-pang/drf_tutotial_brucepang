@@ -17,8 +17,10 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken import views # 提供token认证的视图
 
 urlpatterns = [
+    path('api-token-auth/', views.obtain_auth_token), # 获取token的接口
     path('api-auth/', include('rest_framework.urls')), # DRF的登录退出
     path('admin/', admin.site.urls),
     path('course/', include('course.urls')), # course的路由

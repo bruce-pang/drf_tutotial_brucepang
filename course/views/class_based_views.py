@@ -4,11 +4,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from course.models import CourseModel
 from course.serializers import CourseSerializer
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 """
 二、类视图 Class Based Views
 """
 class CourseList(APIView):
+    authentication_classes = [TokenAuthentication] # 认证类
+    permission_classes = [IsAuthenticated,] # 权限类
     def get(self, request):
         """
 

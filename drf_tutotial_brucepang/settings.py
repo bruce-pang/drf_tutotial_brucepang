@@ -156,8 +156,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication', # session认证, 需要开启CSRF token， 否则会报403错误
         'rest_framework.authentication.TokenAuthentication', # token认证
     ],
-    'DEFAULT_PERMISSION_CLASSES': [ # DRF默认的权限类
-        'rest_framework.permissions.IsAuthenticated', # 需要登录
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [ # DRF默认的权限类（全局设置）
+    #     # 'rest_framework.permissions.AllowAny', # 任何用户都可以访问（默认）
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly', # 未登录用户只能读，登录用户可以读写
+    #     'rest_framework.permissions.IsAuthenticated', # 必须登录才能进行相应操作
+    # ],
     'URL_FIELD_NAME': 'link', # HyperlinkedModelSerializer的url字段名，默认为url，可以自定义
 }

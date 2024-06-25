@@ -1,4 +1,6 @@
 from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from course.models import CourseModel
 from course.serializers import CourseSerializer
@@ -7,6 +9,8 @@ from course.serializers import CourseSerializer
 三、通用类视图 Generic Class Based Views
 """
 class GenericCourseList(generics.ListCreateAPIView): # 自带了get和post方法
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication] # 指定认证类
+    permission_classes = [IsAuthenticated,] # 权限类
     """
     课程列表
     """

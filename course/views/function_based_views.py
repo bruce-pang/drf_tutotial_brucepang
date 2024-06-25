@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from course.models import CourseModel
 from course.serializers import CourseSerializer
 """
@@ -10,6 +11,8 @@ from course.serializers import CourseSerializer
 """
 
 @api_view(['GET', 'POST']) # 限制请求方法为GET和POST
+@authentication_classes([TokenAuthentication]) # 在全局已经设置了多种认证方式，如果某个视图需要特定的认证方式，可以通过此装饰器设置，@authentication_classes一定要写在@api_view的下面，有先后顺序
+@permission_classes(IsAuthenticated,) # 在全局已经设置了多种权限方式，如果某个视图需要特定的权限方式，可以通过此装饰器设置，@permission_classes一定要写在@api_view的下面，有先后顺序 ， 自定义的权限也可以添加在里面
 def course_list(request):
     """
     获取所有课程信息或新增一个课程
