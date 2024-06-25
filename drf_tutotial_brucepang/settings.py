@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-m$^98uk5qw^2zqrh+t*9^fx8r*b0y&9!(@9qbjeb6#y8ze@4!0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -115,7 +114,7 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-# USE_L10N = True
+USE_L10N = True
 
 USE_TZ = False
 
@@ -131,15 +130,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, "static") # DRF有前端文件，使用connect-staticfiles处理静态文件会全部放到此目录
-# STATIC_ROOT = BASE_DIR / 'static' # DRF有前端文件，使用connect-staticfiles处理静态文件会全部放到此目录
+STATIC_ROOT = BASE_DIR / 'static' # DRF有前端文件，使用connect-staticfiles处理静态文件会全部放到此目录
 
-# STATICFILES_DIRS = [
-#     # os.path.join(BASE_DIR, "staticfiles"),
-#     BASE_DIR / 'staticfiles',
-# ]
+STATICFILES_DIRS = [
+    # os.path.join(BASE_DIR, "staticfiles"),
+    BASE_DIR / 'staticfiles',
+]
 # DRF全局配置
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    # "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
