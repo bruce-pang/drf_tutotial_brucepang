@@ -17,9 +17,9 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from course.views import fbv_cbv_views
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), # DRF的登录退出
     path('admin/', admin.site.urls),
+    path('course/', include('course.urls')), # course的路由
 ]
